@@ -24,6 +24,7 @@ class VisualCeption extends CodeceptionModule
     protected $config = [
         'maximumDeviation' => 0,
         'saveCurrentImageIfFailure' => true,
+        'pixelRatio' => 1.0,
         'referenceImageDir' => 'VisualCeption/',
         'currentImageDir' => 'debug/visual/',
         'report' => false,
@@ -32,6 +33,7 @@ class VisualCeption extends CodeceptionModule
     ];
     
     protected $saveCurrentImageIfFailure;
+    protected $pixelRatio;
     private $referenceImageDir;
 
     /**
@@ -78,6 +80,7 @@ class VisualCeption extends CodeceptionModule
 
         $this->maximumDeviation = $this->config["maximumDeviation"];
         $this->saveCurrentImageIfFailure = (boolean)$this->config["saveCurrentImageIfFailure"];
+        $this->pixelRatio = (float)$this->config["pixelRatio"];
         $this->referenceImageDir = (file_exists($this->config["referenceImageDir"]) ? "" : codecept_data_dir()) . $this->config["referenceImageDir"];
 
         if (!is_dir($this->referenceImageDir)) {
@@ -196,7 +199,7 @@ class VisualCeption extends CodeceptionModule
      * @param string $identifier identifies your test object
      * @param string $elementID DOM ID of the element, which should be screenshotted
      * @param string|array $excludeElements string of Element name or array of Element names, which should not appear in the screenshot
-     * @param float $deviation 
+     * @param float $deviation
      */
     public function dontSeeVisualChanges($identifier, $elementID = null, $excludeElements = array(), $deviation = null)
     {
@@ -432,7 +435,13 @@ class VisualCeption extends CodeceptionModule
             $screenshotBinary = $this->webDriver->takeScreenshot();
 
             $screenShotImage->readimageblob($screenshotBinary);
-            $screenShotImage->cropImage($coords['width'], $coords['height'], $coords['offset_x'], $coords['offset_y']);
+
+            $screenShotImage->cropImage(
+                $coords['width'] * $this->pixelRatio,
+                $coords['height'] * $this->pixelRatio,
+                $coords['offset_x'] * $this->pixelRatio,
+                $coords['offset_y'] * $this->pixelRatio
+            );
             $screenShotImage->writeImage($elementPath);
         }
 
