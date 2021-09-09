@@ -2,6 +2,11 @@
 
 See project documentation here: https://github.com/Codeception/VisualCeption
 
+# Installation
+
+`composer require "nixdrey/wbisualception:*" --dev`
+
+
 # What added?
 
 ## Pixel ratio support
