@@ -39,7 +39,7 @@ Make sure you have php-imagick extension installed. Run `php -m` to see if imagi
 Then add VisualCeption to composer.json:
 
 ```
-composer require "codeception/visualception:*" --dev
+composer require "nixdrey/wbisualception:*" --dev
 ```
 
 ### Configuration
@@ -58,6 +58,7 @@ modules:
             maximumDeviation: 5                                   # deviation in percent
             saveCurrentImageIfFailure: true                       # if true, VisualCeption saves the current
             fullScreenShot: true                                  # fullpage screenshot
+            pixelRatio: 3.0                                       # if you need specific pixel ratio for correct cropping (won't work with fullScreenShot: true)
 ```
 
 * **referenceImageDir** (default: `'VisualCeption/'`) VisualCeption uses an "old" image for calculating the deviation. These images have to be stored in data directory (tests/_data) or be relative to it.
