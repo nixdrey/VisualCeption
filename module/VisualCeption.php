@@ -510,7 +510,8 @@ class VisualCeption extends CodeceptionModule
         if (!file_exists($expectedImagePath)) {
             $this->debug("Copying image (from $currentImagePath to $expectedImagePath");
             copy($currentImagePath, $expectedImagePath);
-            return array (null, 0, 'currentImage' => null);
+
+            throw (new \Exception("Reference image $expectedImagePath has just been saved. Start test again. If it's CI run - please add reference."));
         } else {
             return $this->compareImages($expectedImagePath, $currentImagePath);
         }
