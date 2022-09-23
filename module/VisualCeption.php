@@ -1,7 +1,7 @@
 <?php
 namespace Codeception\Module;
 
-use Codeception\Lib\Interfaces\MultiSession as MultiSessionInterface;
+use Codeception\Lib\Interfaces\MultiSession;
 use Codeception\Module as CodeceptionModule;
 use Codeception\Test\Descriptor;
 use Facebook\WebDriver\Exception\UnknownServerException;
@@ -21,7 +21,7 @@ use Codeception\TestInterface;
  * @author Sebastian Neubert
  * @author Ray Romanov
  */
-class VisualCeption extends CodeceptionModule implements MultiSessionInterface
+class VisualCeption extends CodeceptionModule implements MultiSession
 {
     protected $config = [
         'maximumDeviation' => 0,
@@ -330,6 +330,9 @@ class VisualCeption extends CodeceptionModule implements MultiSessionInterface
     {
         if (is_null($elementId)) {
             $elementId = 'body';
+        } else {
+            // escape double quotes to not break JavaScript commands
+            $elementId = str_replace('"', '\\"', $elementId);
         }
 
         $elementExists = (bool)$this->webDriver->executeScript('return document.querySelectorAll( "' . $elementId . '" ).length > 0;');
@@ -611,17 +614,6 @@ class VisualCeption extends CodeceptionModule implements MultiSessionInterface
 
     public function _closeSession($session = null)
     {
-        if (!$session and $this->webDriver) {
-            $session = $this->webDriver;
-        }
-        if (!$session) {
-            return;
-        }
-        try {
-            $session->quit();
-            unset($webDriver);
-        } catch (UnknownServerException $e) {
-            // Session already closed so nothing to do
-        }
+        // this method will never be needed
     }
 }

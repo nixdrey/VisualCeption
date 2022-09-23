@@ -1,3 +1,7 @@
+# 1.0.4
+* Added support for multi session testing - #73
+* Fixed double quotes to not break JavaScript commands - #71
+
 # 1.0.3
 * Fix incorrectly cropped full page screenshots
 * Remove test dependency from www.thewebhatesme.com to local http server
