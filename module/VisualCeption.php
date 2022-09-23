@@ -66,11 +66,6 @@ class VisualCeption extends CodeceptionModule implements MultiSession
      */
     private $test;
 
-    /**
-     * @var string
-     */
-    private $currentEnvironment;
-
     private $failed = array();
     private $logFile;
     private $templateVars = array();
@@ -94,7 +89,6 @@ class VisualCeption extends CodeceptionModule implements MultiSession
 
     public function _beforeSuite($settings = [])
     {
-        $this->currentEnvironment = key_exists('current_environment', $settings) ? $settings['current_environment'] : null;
         $this->_initVisualReport();
     }
 
@@ -564,9 +558,6 @@ class VisualCeption extends CodeceptionModule implements MultiSession
             return;
         }
         $filename = 'vcresult';
-        if ($this->currentEnvironment) {
-            $filename .= '.' . $this->currentEnvironment;
-        }
         $this->logFile = \Codeception\Configuration::logDir() . $filename . '.html';
 
         if (array_key_exists('templateVars', $this->config)) {
