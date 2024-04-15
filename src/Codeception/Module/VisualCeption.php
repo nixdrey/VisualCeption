@@ -13,7 +13,6 @@ use Facebook\WebDriver\Exception\UnknownServerException;
 use RemoteWebDriver;
 use Codeception\Module\VisualCeption\Utils;
 use Codeception\TestInterface;
-use Facebook\WebDriver\Remote\RemoteWebDriver;
 
 /**
  * Class VisualCeption
