@@ -2,16 +2,29 @@
   "name": "nixdrey/wbisualception",
   "description": "Visual regression tests for Codeception (fork from https://github.com/Codeception/VisualCeption)",
   "homepage": "https://github.com/nixdrey/VisualCeption",
+  "version": "5.0.0",
+  "type": "library",
   "license": "Apache-2.0",
   "require": {
-    "php": ">=5.4.0",
-    "ext-imagick": "*"
+    "php": ">=8.0",
+    "ext-imagick": "*",
+    "ext-mbstring": "*",
+    "ext-zip": "*",
+    "ext-xml": "*",
+    "codeception/codeception": "^5.0",
+    "codeception/module-webdriver": "^3.2"
   },
   "require-dev": {
-    "codeception/codeception": "2.5.6",
-    "phpunit/phpunit": "6.5.14"
+    "phpunit/phpunit": "^9.5"
   },
   "autoload": {
-    "classmap": ["module/"]
-  }
+    "classmap": [
+      "src/",
+      "tests/unit/Codeception/Module/TestCestExample.php"
+    ]
+  },
+  "conflict": {
+    "codeception/codeception": "<5.0"
+  },
+  "minimum-stability": "dev"
 }
