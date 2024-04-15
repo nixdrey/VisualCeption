@@ -3,6 +3,7 @@
 .idea/
 .settings/
 vendor/
-test/integration/tests/_log/
-test/integration/tests/_helpers/
-test/integration/tests/_data/VisualCeption/SimpleCept.SimpleBlock.png
+tests/integration/tests/_log/
+tests/integration/tests/_helpers/*
+!tests/integration/tests/_helpers/WebGuy.php
+tests/integration/tests/_data/VisualCeption/SimpleCept.SimpleBlock.png

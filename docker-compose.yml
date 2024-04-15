@@ -1,11 +1,10 @@
-version: '3'
+version: '3.8'
 
 services:
   php:
     build:
-      context: ./docker
-      dockerfile: php.docker
-    command: bash -c 'cd /project && composer install && php vendor/bin/codecept build -c test/integration/ && php vendor/bin/codecept run -c test/integration/ && vendor/bin/phpunit test/unit/'
+      context: ./docker/php
+    command: bash -c 'cd /project && composer install && php vendor/bin/codecept build -c tests/integration/ && php vendor/bin/codecept run -c tests/integration/ && vendor/bin/phpunit tests/unit/'
     volumes:
       - ./:/project
     depends_on:
@@ -24,6 +23,6 @@ services:
       context: ./docker
       dockerfile: httpServer.docker
     volumes:
-      - ./test/integration/html:/public
+      - ./tests/integration/html:/public
     ports:
       - '8080:8080'

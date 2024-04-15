@@ -1,6 +1,7 @@
 <?php
 
-use Codeception\Module\ImageDeviationException;
+use Codeception\Exception\ImageDeviationException;
+use PHPUnit\Framework\ExpectationFailedException;
 
 class WriteCurrentImageCest
 {
@@ -18,7 +19,7 @@ class WriteCurrentImageCest
             $currentImagePath = $exception->getCurrentImage();
 
             if (!is_file($exception->getCurrentImage())) {
-                throw new \PHPUnit_Framework_ExpectationFailedException("The screenshot was not saved successfully.");
+                throw new ExpectationFailedException("The screenshot was not saved successfully.");
             }
         }
     }

@@ -1,12 +1,15 @@
 <?php
 
-namespace Codeception\Module\VisualCeption;
+namespace Codeception\Module;
 
 use Codeception\Test\Descriptor;
 use Codeception\TestInterface;
 
 class Utils
 {
+    /**
+     * @throws \JsonException
+     */
     public function getTestFileName(TestInterface $test, $identifier)
     {
         $filename = preg_replace('~\W~', '.', Descriptor::getTestSignatureUnique($test));
